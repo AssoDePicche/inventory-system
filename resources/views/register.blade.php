@@ -3,10 +3,10 @@
 @section('content')
     <h1>Cadastro</h1>
 
-    <form action="{{ route('users.store') }}" method="POST">
+    <form action="/register" method="POST">
         @csrf
 
-        <x-input name="username" placholder="Nome" type="text"/ >
+        <x-input name="username" placeholder="Nome" type="text" />
 
         <x-input name="email" placeholder="Email" type="email" />
 

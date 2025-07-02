@@ -23,7 +23,13 @@ Route::get('/register', function () {
     return view('register');
 });
 
-Route::middleware(['auth']->group(function () {
+Route::post('/register', [UserController::class, 'store'])->name('register');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
     Route::resource('categories', CategoryController::class);
 
     Route::resource('products', ProductController::class);
@@ -31,4 +37,4 @@ Route::middleware(['auth']->group(function () {
     Route::resource('transactions', TransactionController::class);
 
     Route::resource('users', UserController::class);
-}));
+});
