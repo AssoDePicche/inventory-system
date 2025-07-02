@@ -34,4 +34,15 @@ class Category extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public static function getExcludingParentAndChildren(string $id)
+    {
+        $self = self::findOrFail($id);
+
+        $parent = $self->parent;
+
+        $children = self::where('parent_id', $id)->pluck('id')->toArray();
+
+        return self::whereNotIn('id', array_merge([$id], $children, [$parent]))->get();
+    }
 }

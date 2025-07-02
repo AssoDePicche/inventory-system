@@ -9,8 +9,9 @@
         </p>
 
         <a href="{{ route('categories.create') }}">
-            Cadastrar uma categoria
+            Cadastre uma categoria
         </a>
     @else
+        <a href="{{ route('categories.index') }}">Listar {{auth()->user()->categories()->count()}} categorias</a>
     @endif
 @endsection

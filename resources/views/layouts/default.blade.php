@@ -13,7 +13,12 @@
 
                 <ul>
                     <li>
-                        <a href="{{ route('categories.create') }}">
+                        <a href="/dashboard">
+                            Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('categories.index') }}">
                             Categorias
                         </a>
                     </li>
