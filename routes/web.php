@@ -11,6 +11,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/login', function () {
+    return view('login');
+});
+
+Route::post('/login', [UserController::class, 'login'])->name('login');
+
+Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+
+Route::get('/register', function () {
+    return view('register');
+});
+
 Route::resource('categories', CategoryController::class);
 
 Route::resource('products', ProductController::class);
