@@ -5,10 +5,38 @@ namespace App\Http\Controllers;
 use App\Models\User;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    public function login(Request $request) {
+        $validated = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:8',
+        ]);
+
+        $user = User::where('email', $validated['email'])->first();
+
+        $matchPassword = Hash::check($validated['password'], $user->password);
+
+        if (!$user || !$matchPassword) {
+            return back()->withErrors([
+                'email' => 'Credenciais inválidas',
+            ]);
+        }
+
+        Auth::login($user);
+
+        return redirect()->route('dashboard');
+    }
+
+    public function logout(Request $request) {
+        Auth::logout();
+
+        return redirect()->route('login');
+    }
+
     public function index()
     {
         $users = User::all();
@@ -18,21 +46,21 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'username' => 'required|unique:users',
+        $validated = $request->validate([
+            'username' => 'required|string|max:255|unique:users',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8',
-            'is_admin' => 'boolean',
         ]);
 
-        User::create([
-            'username' => $request->username,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'is_admin' => $request->has('is_admin'),
+        $user = User::create([
+            'username' => $validated['username'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
         ]);
 
-        return redirect()->route('users.index')->with('success', 'User created successfully.');
+        Auth::login($user);
+
+        return redirect()->route('dashboard');
     }
 
     public function show(User $user)
