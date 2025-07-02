@@ -1,34 +1,54 @@
-<h1>Products</h1>
+@extends('layouts.default')
 
-<a href="{{ route('products.create') }}">Add New Product</a>
+@section('content')
+    @if(auth()->user()->products()->count() !== 0)
+    <a href="{{ route('products.create') }}">Adicione um novo produto</a>
 
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>SKU</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($products as $product)
+    <table border="1">
+        <thead>
             <tr>
-                <td>{{ $product->name }}</td>
-                <td>{{ $product->sku }}</td>
-                <td>{{ $product->quantity }}</td>
-                <td>${{ number_format($product->price, 2) }}</td>
-                <td>
-                    <a href="{{ route('products.show', $product->id) }}">View</a>
-                    <a href="{{ route('products.edit', $product->id) }}">Edit</a>
-                    <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit">Delete</button>
-                    </form>
-                </td>
+                <th>Nome</th>
+                <th>Categoria</th>
+                <th>Preço</th>
+                <th>Quantidade em estoque</th>
+                <th>Quantidade mínima</th>
+                <th>Cadastrado em</th>
+                <th>Ações</th>
             </tr>
-        @endforeach
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach ($products as $product)
+                <tr>
+                    <td>{{ $product->name }}</td>
+                    <td>{{ $product->category->name }}</td>
+                    <td>${{ number_format($product->price, 2) }}</td>
+                    <td>{{ $product->quantity }}</td>
+                    <td>{{ $product->min_quantity }}</td>
+                    <td>{{ $product->created_at->format('Y-m-d H:i:s') }}</td>
+                    <td>
+                        <a href="{{ route('products.show', $product->id) }}">
+                            Ver
+                        </a>
+                        <a href="{{ route('products.edit', $product->id) }}">
+                            Editar
+                        </a>
+                        <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline-block;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">
+                                Excluir
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+    @else
+        <p>Você ainda não adicionou um produto ao sistema!</p>
+
+        <a href="{{ route('products.create') }}">
+            Cadastre um produto
+        </a>
+    @endif
+@endsection

@@ -1,26 +1,28 @@
-<h1>Add New Product</h1>
+@extends('layouts.default')
 
-<form action="{{ route('products.store') }}" method="POST">
-    @csrf
-    <div>
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
-    </div>
-    <div>
-        <label for="sku">SKU:</label>
-        <input type="text" id="sku" name="sku" required>
-    </div>
-    <div>
-        <label for="description">Description:</label>
-        <textarea id="description" name="description"></textarea>
-    </div>
-    <div>
-        <label for="price">Price:</label>
-        <input type="number" id="price" name="price" step="0.01" required>
-    </div>
-    <div>
-        <label for="quantity">Quantity:</label>
-        <input type="number" id="quantity" name="quantity" required>
-    </div>
-    <button type="submit">Save Product</button>
-</form>
+@section('content')
+    <form action="{{ route('products.store') }}" method="POST">
+        @csrf
+
+        <x-input name="name" placeholder="Nome" type="text" />
+
+        <label for="category_id">Categoria</label>
+        <select id="category_id" name="category_id" required>
+            @foreach ($categories as $category)
+                <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+            @endforeach
+        </select>
+
+        <x-input name="price" placeholder="Preço" type="number" />
+
+        <x-input name="quantity" placeholder="Quantidade atual em estoque" type="number" />
+
+        <x-input name="min_quantity" placeholder="Quantidade mínima em estoque" type="number" />
+
+        <x-textarea name="description" placeholder="Descrição" rows="6" cols="60" />
+
+        <button type="submit">Adicionar</button>
+    </form>
+
+    <a href="{{ route('products.index') }}">Voltar</a>
+@endsection
