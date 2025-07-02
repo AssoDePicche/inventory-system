@@ -23,10 +23,12 @@ Route::get('/register', function () {
     return view('register');
 });
 
-Route::resource('categories', CategoryController::class);
+Route::middleware(['auth']->group(function () {
+    Route::resource('categories', CategoryController::class);
 
-Route::resource('products', ProductController::class);
+    Route::resource('products', ProductController::class);
 
-Route::resource('transactions', TransactionController::class);
+    Route::resource('transactions', TransactionController::class);
 
-Route::resource('users', UserController::class);
+    Route::resource('users', UserController::class);
+}));
