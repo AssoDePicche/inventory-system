@@ -24,7 +24,7 @@
                     <td>R$ {{ number_format($product->price, 2) }}</td>
                     <td>{{ $product->quantity }}</td>
                     <td>{{ $product->min_quantity }}</td>
-                    <td>{{ $product->created_at->format('Y-m-d H:i:s') }}</td>
+                    <td>{{ $product->created_at->format('d M y') }}</td>
                     <td>
                         <a href="{{ route('products.show', $product->id) }}">
                             Ver

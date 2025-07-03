@@ -4,6 +4,7 @@
         <meta charset='utf-8'>
         <meta name='viewport' content='width=device-width,initial-scale=1'>
         <title>{{ config('app.name') }}</title>
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
 
     <body>
@@ -30,6 +31,11 @@
                     <li>
                         <a href="{{ route('transactions.index') }}">
                             Transações
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/logout">
+                            Sair
                         </a>
                     </li>
                 </ul>

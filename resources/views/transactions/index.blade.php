@@ -21,7 +21,7 @@
                     <td>{{ $transaction->quantity }}</td>
                     <td>R$ {{ number_format($transaction->price, 2) }}</td>
                     <td>R$ {{ number_format($transaction->price * $transaction->quantity, 2) }}</td>
-                    <td>{{ $transaction->created_at->format('Y-m-d H:i:s') }}</td>
+                    <td>{{ $transaction->created_at->format('d M y') }}</td>
                 </tr>
             @endforeach
         </tbody>

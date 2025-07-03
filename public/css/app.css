@@ -1,0 +1,153 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #232323;
+    color: #f5f5f5;
+    height: 100vh;
+}
+
+navbar {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+navbar div:first-of-type {
+    font-size: 1.5rem;
+}
+
+navbar ul {
+    display: flex;
+    list-style: none;
+}
+
+navbar li {
+    padding: 0 1rem;
+}
+
+navbar a {
+    color: inherit;
+    font-size: 1rem;
+    font-weight: bold;
+    opacity: .5;
+    text-decoration: none;
+    transition: 240ms ease;
+}
+
+navbar a:hover {
+    opacity: 1;
+}
+
+main {
+    height: 100%;
+    padding: 1rem;
+}
+
+main ul {
+    list-style: none;
+}
+
+main a {
+    color: inherit;
+    font-weight: bold;
+    text-decoration: none;
+    opacity: .5;
+    transition: 240ms ease;
+}
+
+main a:hover  {
+    opacity: 1;
+}
+
+table {
+    display: table;
+    border: none;
+    border-spacing: .25rem;
+    border-collapse: separate;
+    text-indent: 0;
+    width: 100%;
+}
+
+table a {
+    font-weight: bold;
+    opacity: .5;
+    transition: 240ms ease;
+}
+
+table a:hover {
+    opacity: 1;
+}
+
+
+main th, td {
+    border: none;
+    padding: .75rem 1rem;
+    text-align: center;
+}
+
+table button {
+    border: none;
+    background: none;
+    color: inherit;
+    font-size: 1rem;
+    font-weight: bold;
+    opacity: .5;
+    transition: 240ms ease;
+}
+
+table button:hover  {
+    cursor: pointer;
+    opacity: .5;
+}
+
+footer {
+    align-items: center;
+    display: flex;
+    font-weight: bold;
+    justify-content: center;
+    margin-top: auto;
+    opacity: .5;
+    padding: 2rem 1rem;
+}
+
+form {
+    display: grid;
+    gap: 2rem;
+    padding: 1rem 0;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+input {
+    background-color: inherit;
+    padding: .5rem 1rem;
+    color: inherit;
+    font-size: 1rem;
+    height: 4rem;
+    font-weight: bold;
+    border: .2rem solid #f5f5f5;
+    border-radius: .5rem;
+    width: 100%;
+}
+
+button {
+  padding: .5rem 1.5rem;
+  background-color: inherit;
+  font-size: 1rem;
+  font-weight: bold;
+  height: 4rem;
+  color: inherit;
+  border: .2rem solid #f5f5f5;
+  border-radius: .5rem;
+  cursor: pointer;
+}
+

@@ -75,6 +75,6 @@ class CategoryController extends Controller
     {
         $category->delete();
 
-        return redirect()->route('dashboard')->with('success', 'Category deleted with sucess');
+        return redirect()->route('dashboard')->with('success', 'Categoria deletada');
     }
 }

@@ -1,15 +1,15 @@
 @extends('layouts.default')
 
 @section('content')
-    <h1>Detalhes do produto</h1>
-
-    <p><strong>Nome:</strong> {{ $product->name }}</p>
-    <p><strong>Descrição</strong> {{ $product->description ?? 'N/A' }}</p>
-    <p><strong>Preço</strong> R$ {{ number_format($product->price, 2) }}</p>
-    <p><strong>Quantidade em estoque</strong> {{ $product->quantity }}</p>
-    <p><strong>Quantidade mínima em estoque</strong> {{ $product->min_quantity }}</p>
-    <p><strong>Categoria</strong> {{ $product->category->name ?? 'N/A' }}</p>
-    <p><strong>Criado em</strong> {{ $product->created_at->format('Y-m-d H:i:s') }}</p>
+    <h1>{{ $product->name }}</h1>
+    <h4>{{ $product->category->name }}</h4>
+    <br>
+    <p>{{ $product->description ?? '' }}</p>
+    <p>Preço R$ {{ number_format($product->price, 2) }}</p>
+    <p>{{ $product->quantity }} item(s) em estoque</p>
+    <p>Quantidade mínima permitida: {{ $product->min_quantity }}</p>
+    <p>Criado em {{ $product->created_at->format('d M y') }}</p>
+    <br>
 
     <h2>Transações</h2>
     @if ($product->transactions->count() > 0)
@@ -28,7 +28,7 @@
                         <td>{{ $transaction->id }}</td>
                         <td>{{ $transaction->quantity }}</td>
                         <td>${{ number_format($transaction->price, 2) }}</td>
-                        <td>{{ $transaction->created_at->format('Y-m-d H:i:s') }}</td>
+                        <td>{{ $transaction->created_at->format('d M y') }}</td>
                     </tr>
                 @endforeach
             </tbody>
