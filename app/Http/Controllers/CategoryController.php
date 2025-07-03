@@ -55,10 +55,10 @@ class CategoryController extends Controller
         return view('categories.edit', compact('categories', 'category'));
     }
 
-    public function update(Request $request, string $id)
+    public function update(Request $request, Category $category)
     {
         $request->validate([
-            'name' => 'required|string|max:255|unique:categories',
+            'name' => 'required|string|max:255',
             'parent_id' => 'nullable|exists:categories,id',
         ]);
 
@@ -68,7 +68,7 @@ class CategoryController extends Controller
             'user_id' => Auth::user()->id,
         ]);
 
-        return redirect()->route('dashboard')->with('success', 'Category updated successfully');
+        return redirect()->route('dashboard')->with('success', 'Alterações realizadas');
     }
 
     public function destroy(Category $category)

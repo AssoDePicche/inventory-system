@@ -21,7 +21,7 @@
                 <tr>
                     <td>{{ $product->name }}</td>
                     <td>{{ $product->category->name }}</td>
-                    <td>${{ number_format($product->price, 2) }}</td>
+                    <td>R$ {{ number_format($product->price, 2) }}</td>
                     <td>{{ $product->quantity }}</td>
                     <td>{{ $product->min_quantity }}</td>
                     <td>{{ $product->created_at->format('Y-m-d H:i:s') }}</td>

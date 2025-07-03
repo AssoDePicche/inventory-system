@@ -2,63 +2,45 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $transactions = Transaction::all();
+
+        return view('transactions.index', compact('transactions'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $products = Product::whereRaw('quantity > min_quantity')->get();
+
+        return view('transactions.create', compact('products'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
-    }
+        $validated = $request->validate([
+            'product_id' => 'required|exists:products,id',
+            'quantity' => 'required|numeric|min:1',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        $transaction = Transaction::create([
+            'product_id' => $validated['product_id'],
+            'quantity' => $validated['quantity'],
+            'price' => Product::find($validated['product_id'])->first()->price,
+        ]);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+        $product = Product::find($validated['product_id']);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+        $product->quantity -= $validated['quantity'];
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $product->save();
+
+        return redirect()->route('transactions.index')->with('sucess', 'Transação cadastrada');
     }
 }
