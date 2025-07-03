@@ -16,7 +16,7 @@ class Input extends Component
         $this->name = $name;
         $this->placeholder = $placeholder;
         $this->type = $type;
-        $this->value = old($name, $value); // Fetch old value or default to provided value
+        $this->value = old($name, $value);
     }
 
     public function render()
